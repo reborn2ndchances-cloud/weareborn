@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REBORN® | Reinvent Yourself</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   REBORN® — CUSTOMIZE YOUR BRAND HERE
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* EDIT HERE: Brand Colors */
+  --bg-white: #FFFFFF;
+  --bg-off-white: #F8F7F5;
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --warm-sand: #E8DFC9;
+  --stone: #D8D2C7;
+  --chocolate: #5B4636;
+  --deep-navy: #24384A;
+  --divider: #EAEAEA;
+  --hover: #111111;
+  
+  /* Typography */
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════ LOADER ═══════════════════ */
+.loader {
+  position: fixed; inset: 0; background: var(--bg-white);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; transition: opacity 0.8s ease;
+}
+.loader.hidden { opacity: 0; pointer-events: none; }
+.loader-text {
+  font-family: var(--font-heading);
+  font-size: 3rem; letter-spacing: 0.3em;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════ NAVIGATION ═══════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--divider);
+  transition: all 0.3s ease;
+}
+.nav-container {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+}
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem; letter-spacing: 0.15em;
+  color: var(--text-primary); text-decoration: none;
+}
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-links a {
+  text-decoration: none; color: var(--text-primary);
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--text-secondary); }
+.nav-icons {
+  display: flex; gap: 1.5rem; align-items: center;
+}
+.nav-icon {
+  background: none; border: none; cursor: pointer;
+  position: relative; padding: 0.3rem;
+}
+.nav-icon svg { width: 20px; height: 20px; }
+.cart-count {
+  position: absolute; top: -5px; right: -5px;
+  background: var(--text-primary); color: white;
+  font-size: 0.6rem; width: 16px; height: 16px;
+  border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+}
+.hamburger { display: none; background: none; border: none; cursor: pointer; }
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed; inset: 0; background: var(--bg-white);
+  z-index: 999; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2rem;
+  transform: translateX(100%); transition: transform 0.5s ease;
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: var(--font-heading);
+  font-size: 2.5rem; text-decoration: none;
+  color: var(--text-primary); letter-spacing: 0.1em;
+}
+.mobile-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  background: none; border: none; font-size: 2rem; cursor: pointer;
+}
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero {
+  min-height: 100vh; display: flex;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 8rem 2rem 4rem;
+  background: var(--bg-white);
+}
+.hero-content { max-width: 900px; }
+.hero-label {
+  font-size: 0.7rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: 0.05em; line-height: 0.95;
+  margin-bottom: 1.5rem;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--text-secondary);
+  max-width: 500px; margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.hero-supporting {
+  font-size: 0.85rem; color: var(--text-secondary);
+  max-width: 450px; margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+.hero-buttons {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+  padding: 1rem 2.5rem; font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; cursor: pointer; transition: all 0.3s;
+  text-decoration: none; display: inline-block;
+}
+.btn-primary {
+  background: var(--text-primary); color: white; border: none;
+}
+.btn-primary:hover { background: var(--hover); }
+.btn-outline {
+  background: transparent; color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+.btn-outline:hover { background: var(--text-primary); color: white; }
+
+/* ═══════════════════ SECTIONS ═══════════════════ */
+.section { padding: 6rem 2rem; }
+.section-header {
+  text-align: center; max-width: 700px; margin: 0 auto 4rem;
+}
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.05em; margin-bottom: 1rem;
+}
+.section-desc {
+  color: var(--text-secondary); font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════ PRODUCT GRID ═══════════════════ */
+.products-section { background: var(--bg-off-white); }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; max-width: 1400px; margin: 0 auto;
+}
+.product-card {
+  background: white; cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+.product-image {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3/4; background: var(--bg-off-white);
+}
+.product-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.product-card:hover .product-image img { transform: scale(1.05); }
+.product-quick {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  padding: 0.8rem; text-align: center;
+  font-size: 0.7rem; letter-spacing: 0.15em;
+  text-transform: uppercase; transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.product-card:hover .product-quick { transform: translateY(0); }
+.product-info { padding: 1.2rem; }
+.product-collection {
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+.product-name {
+  font-size: 0.9rem; font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.product-color {
+  font-size: 0.75rem; color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.product-price {
+  font-size: 0.85rem; font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+.size-selector {
+  display: flex; gap: 0.4rem; margin-bottom: 0.8rem;
+}
+.size-btn {
+  width: 32px; height: 32px; border: 1px solid var(--divider);
+  background: white; font-size: 0.65rem; cursor: pointer;
+  transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.size-btn:hover, .size-btn.active {
+  background: var(--text-primary); color: white; border-color: var(--text-primary);
+}
+.clear-size {
+  font-size: 0.6rem; color: var(--text-secondary);
+  background: none; border: none; cursor: pointer;
+  text-decoration: underline; margin-bottom: 0.8rem;
+}
+.add-cart {
+  width: 100%; padding: 0.8rem;
+  background: var(--text-primary); color: white;
+  border: none; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.3s;
+}
+.add-cart:hover { background: var(--hover); }
+
+/* ═══════════════════ COLLECTION STORY ═══════════════════ */
+.story-section {
+  background: var(--chocolate); color: white;
+  text-align: center;
+}
+.story-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 1.5rem;
+}
+.story-body {
+  max-width: 650px; margin: 0 auto 2rem;
+  font-size: 1rem; line-height: 1.9;
+  opacity: 0.9;
+}
+.scripture {
+  font-style: italic; font-weight: 300;
+  font-size: 1.1rem; opacity: 0.8;
+}
+.scripture-ref {
+  font-size: 0.75rem; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-top: 0.5rem;
+  opacity: 0.6;
+}
+
+/* ═══════════════════ ABOUT ═══════════════════ */
+.about-section { background: var(--bg-white); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; max-width: 1200px; margin: 0 auto;
+  align-items: center;
+}
+.about-image {
+  aspect-ratio: 4/5; overflow: hidden;
+}
+.about-image img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.about-content h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+.about-content p {
+  color: var(--text-secondary); line-height: 1.9;
+  margin-bottom: 1rem; font-size: 0.95rem;
+}
+
+/* ═══════════════════ NEWSLETTER ═══════════════════ */
+.newsletter {
+  background: var(--bg-off-white);
+  text-align: center; padding: 5rem 2rem;
+}
+.newsletter h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+.newsletter p {
+  color: var(--text-secondary); max-width: 450px;
+  margin: 0 auto 2rem; font-size: 0.9rem;
+}
+.newsletter-form {
+  display: flex; gap: 0; max-width: 450px;
+  margin: 0 auto; border-bottom: 1px solid var(--text-primary);
+}
+.newsletter-form input {
+  flex: 1; padding: 1rem 0; border: none;
+  background: transparent; font-size: 0.9rem;
+  outline: none; font-family: var(--font-body);
+}
+.newsletter-form button {
+  padding: 1rem 0 1rem 1.5rem; border: none;
+  background: transparent; font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; cursor: pointer; color: var(--text-primary);
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+.footer {
+  background: var(--text-primary); color: white;
+  padding: 4rem 2rem 2rem;
+}
+.footer-container {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 2rem; letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.footer-tagline {
+  font-size: 0.8rem; opacity: 0.6; line-height: 1.6;
+}
+.footer-col h4 {
+  font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 1.2rem;
+  opacity: 0.8;
+}
+.footer-col a {
+  display: block; color: white; text-decoration: none;
+  font-size: 0.8rem; margin-bottom: 0.7rem;
+  opacity: 0.6; transition: opacity 0.3s;
+}
+.footer-col a:hover { opacity: 1; }
+.footer-bottom {
+  max-width: 1200px; margin: 3rem auto 0;
+  padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex; justify-content: space-between;
+  font-size: 0.7rem; opacity: 0.5;
+}
+
+/* ═══════════════════ CART DRAWER ═══════════════════ */
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  z-index: 2000; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 420px; max-width: 100%;
+  background: white; z-index: 2001;
+  transform: translateX(100%); transition: transform 0.4s ease;
+  display: flex; flex-direction: column;
+}
+.cart-drawer.open { transform: translateX(0); }
+.cart-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--divider);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.cart-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem; letter-spacing: 0.1em;
+}
+.cart-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+.cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+.cart-empty {
+  text-align: center; color: var(--text-secondary);
+  padding: 3rem 0; font-size: 0.9rem;
+}
+.cart-item {
+  display: flex; gap: 1rem; padding: 1rem 0;
+  border-bottom: 1px solid var(--divider);
+}
+.cart-item-img {
+  width: 80px; height: 100px; object-fit: cover;
+  background: var(--bg-off-white);
+}
+.cart-item-info { flex: 1; }
+.cart-item-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; }
+.cart-item-variant { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.cart-item-price { font-size: 0.8rem; font-weight: 600; }
+.cart-item-qty {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.cart-item-qty button {
+  width: 24px; height: 24px; border: 1px solid var(--divider);
+  background: white; cursor: pointer; font-size: 0.8rem;
+}
+.cart-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--divider);
+}
+.cart-subtotal {
+  display: flex; justify-content: space-between;
+  margin-bottom: 1rem; font-size: 0.9rem;
+}
+.cart-subtotal span:last-child { font-weight: 600; }
+.checkout-btn {
+  width: 100%; padding: 1rem;
+  background: var(--text-primary); color: white;
+  border: none; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  font-weight: 600; cursor: pointer;
+}
+
+/* ═══════════════════ TOAST ═══════════════════ */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text-primary); color: white;
+  padding: 1rem 2rem; font-size: 0.8rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  z-index: 5000; opacity: 0; transition: all 0.4s ease;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width: 1024px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-container { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .hero { padding-top: 6rem; }
+  .section { padding: 4rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .product-info { padding: 0.8rem; }
+  .size-btn { width: 28px; height: 28px; font-size: 0.6rem; }
+}
+
+/* ═══════════════════ SCROLL ANIMATIONS ═══════════════════ */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ LOADER ═══════════════════ -->
+<div class="loader" id="loader">
+  <div class="loader-text">REBORN®</div>
+</div>
+
+<!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+  <a href="#shop" onclick="toggleMobileMenu()">SHOP</a>
+  <a href="#collection" onclick="toggleMobileMenu()">NEW BEGINNINGS</a>
+  <a href="#about" onclick="toggleMobileMenu()">ABOUT</a>
+  <a href="#journal" onclick="toggleMobileMenu()">JOURNAL</a>
+  <a href="#community" onclick="toggleMobileMenu()">COMMUNITY</a>
+  <a href="#contact" onclick="toggleMobileMenu()">CONTACT</a>
+</div>
+
+<!-- ═══════════════════ NAVIGATION ═══════════════════ -->
+<nav class="nav" id="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">REBORN®</a>
+    <ul class="nav-links">
+      <li><a href="#shop">SHOP</a></li>
+      <li><a href="#collection">NEW BEGINNINGS</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#journal">JOURNAL</a></li>
+      <li><a href="#community">COMMUNITY</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button class="nav-icon" title="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="nav-icon" title="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="nav-icon" title="Wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="nav-icon" onclick="toggleCart()" title="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <div class="hero-label">Premium Streetwear — Malawi</div>
+    <h1>REINVENT<br>YOURSELF</h1>
+    <p class="hero-sub">Premium streetwear inspired by faith, purpose, and new beginnings.</p>
+    <p class="hero-supporting">The NEW BEGINNINGS COLLECTION explores redemption through timeless design and heavyweight craftsmanship.</p>
+    <div class="hero-buttons">
+      <a href="#shop" class="btn btn-primary">SHOP COLLECTION</a>
+      <a href="#collection" class="btn btn-outline">EXPLORE THE STORY</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURED COLLECTION ═══════════════════ -->
+<section class="section" id="shop">
+  <div class="section-header fade-in">
+    <div class="section-label">The Collection</div>
+    <h2>NEW BEGINNINGS COLLECTION</h2>
+    <p class="section-desc">A collection inspired by transformation. Crafted with premium heavyweight cotton, oversized silhouettes, and minimalist design language.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ PRODUCTS ═══════════════════ -->
+<section class="section products-section" id="products">
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- ═══════════════════ COLLECTION STORY ═══════════════════ -->
+<section class="section story-section" id="collection">
+  <div class="fade-in">
+    <div class="section-label" style="color: rgba(255,255,255,0.6);">The Story</div>
+    <h2>NEW BEGINNINGS</h2>
+    <p class="story-body">Every chapter has a beginning. This collection is inspired by the belief that no matter your past, transformation is always possible. Crafted with timeless silhouettes, heavyweight fabrics, and purposeful design, every garment represents identity, hope, and the courage to begin again.</p>
+    <p class="scripture">"Unless one is born again, he cannot see the Kingdom of God."</p>
+    <p class="scripture-ref">— John 3:3</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section class="section about-section" id="about">
+  <div class="about-grid">
+    <div class="about-image fade-in">
+      <!-- EDIT HERE: Replace with your campaign photo -->
+      <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=800&q=80" alt="REBORN Campaign">
+    </div>
+    <div class="about-content fade-in">
+      <div class="section-label">Our Purpose</div>
+      <h2>WHO WE ARE</h2>
+      <p>REBORN® exists to create premium streetwear rooted in purpose. Our garments are designed to inspire confidence, encourage transformation, and remind every person that their story is never finished.</p>
+      <p>We believe clothing can become more than fashion. It can become a reminder. A statement. A testimony.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ COMMUNITY ═══════════════════ -->
+<section class="section" id="community">
+  <div class="section-header fade-in">
+    <div class="section-label">The Movement</div>
+    <h2>JOIN THE MOVEMENT</h2>
+    <p class="section-desc">Be part of a community that believes in purpose over trends. Share your story. Wear your faith.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ NEWSLETTER ═══════════════════ -->
+<section class="newsletter" id="contact">
+  <div class="fade-in">
+    <h2>STAY CONNECTED.</h2>
+    <p>Receive early access to collections, exclusive releases, and stories behind the garments.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Thank you for subscribing!');">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">JOIN</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-logo">REBORN®</div>
+      <p class="footer-tagline">Premium streetwear rooted in purpose.<br>Reinvent Yourself.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">All Products</a>
+      <a href="#">New Arrivals</a>
+      <a href="#">T-Shirts</a>
+      <a href="#">Hoodies</a>
+      <a href="#">Accessories</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About</a>
+      <a href="#">Journal</a>
+      <a href="#">Community</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Returns</a>
+      <a href="#">Shipping</a>
+      <a href="#">Size Guide</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 REBORN®. All Rights Reserved.</span>
+    <span>Instagram · TikTok · Facebook · Pinterest</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════ CART DRAWER ═══════════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>YOUR BAG</h3>
+    <button class="cart-close" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your bag is empty</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cartTotal">MK0</span>
+    </div>
+    <button class="checkout-btn">CHECKOUT</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ TOAST ═══════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   EDIT HERE: PRODUCT DATA
+   Add new products by copying the format below.
+   Replace image URLs with your own product photos.
+   ═══════════════════════════════════════════════ */
+
+const products = [
+  {
+    id: 1,
+    name: "Reborn Heavyweight Tee",
+    color: "Chocolate Brown",
+    price: 100000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    // EDIT HERE: Replace with your product images
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
+    description: "Premium heavyweight cotton tee with oversized box fit. Features silicone 3D chest print, luxury neck label, and double stitch construction."
+  },
+  {
+    id: 2,
+    name: "REBORN® Heavyweight Tee",
+    color: "Vintage Black",
+    price: 100000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&q=80",
+    description: "Premium heavyweight cotton tee with oversized box fit. Features silicone 3D chest print, luxury neck label, and double stitch construction."
+  },
+  {
+    id: 3,
+    name: "REBORN® Heavyweight Tee",
+    color: "Stone",
+    price: 100000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&q=80",
+    description: "Premium heavyweight cotton tee with oversized box fit. Features silicone 3D chest print, luxury neck label, and double stitch construction."
+  },
+  {
+    id: 4,
+    name: "REBORN® Oversized Hoodie",
+    color: "Chocolate",
+    price: 180000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80",
+    description: "Premium heavyweight hoodie with oversized fit. Features kangaroo pocket, ribbed cuffs, and embroidered logo detail."
+  },
+  {
+    id: 5,
+    name: "REBORN® Sweat Shorts",
+    color: "Dusty Blue",
+    price: 85000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&q=80",
+    description: "Premium heavyweight sweat shorts with relaxed fit. Features elastic waistband and side pockets."
+  },
+  {
+    id: 6,
+    name: "REBORN® Cap",
+    color: "Black",
+    price: 55000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["ONE SIZE"],
+    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=80",
+    description: "Premium cotton twill cap with embroidered REBORN® logo. Adjustable strap closure."
+  },
+  {
+    id: 7,
+    name: "REBORN® Heavyweight Tee",
+    color: "Warm Sand",
+    price: 100000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80",
+    description: "Premium heavyweight cotton tee with oversized box fit. Features silicone 3D chest print, luxury neck label, and double stitch construction."
+  },
+  {
+    id: 8,
+    name: "REBORN® Oversized Hoodie",
+    color: "Deep Navy",
+    price: 180000,
+    collection: "NEW BEGINNINGS",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80",
+    description: "Premium heavyweight hoodie with oversized fit. Features kangaroo pocket, ribbed cuffs, and embroidered logo detail."
+  }
+];
+
+/* ═══════════════════════════════════════════════
+   CART SYSTEM
+   ═══════════════════════════════════════════════ */
+
+let cart = [];
+let selectedSizes = {};
+
+function formatPrice(price) {
+  return 'MK' + price.toLocaleString();
+}
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-image" onclick="quickView(${p.id})">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="product-quick">QUICK VIEW</div>
+      </div>
+      <div class="product-info">
+        <div class="product-collection">${p.collection}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-color">${p.color}</div>
+        <div class="product-price">${formatPrice(p.price)}</div>
+        <div class="size-selector">
+          ${p.sizes.map(s => `
+            <button class="size-btn ${selectedSizes[p.id] === s ? 'active' : ''}" 
+                    onclick="selectSize(${p.id}, '${s}', this)">${s}</button>
+          `).join('')}
+        </div>
+        <button class="clear-size" onclick="clearSize(${p.id})">Clear</button>
+        <button class="add-cart" onclick="addToCart(${p.id})">ADD TO CART</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectSize(productId, size, btn) {
+  selectedSizes[productId] = size;
+  const card = btn.closest('.product-card');
+  card.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function clearSize(productId) {
+  delete selectedSizes[productId];
+  renderProducts();
+}
+
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  const size = selectedSizes[productId] || product.sizes[0];
+  
+  const existing = cart.find(item => item.id === productId && item.size === size);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, size, qty: 1 });
+  }
+  
+  updateCart();
+  showToast(`${product.name} added to bag`);
+}
+
+function updateCart() {
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  
+  const itemsContainer = document.getElementById('cartItems');
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  document.getElementById('cartTotal').textContent = formatPrice(total);
+  
+  if (cart.length === 0) {
+    itemsContainer.innerHTML = '<div class="cart-empty">Your bag is empty</div>';
+    return;
+  }
+  
+  itemsContainer.innerHTML = cart.map((item, i) => `
+    <div class="cart-item">
+      <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-variant">${item.color} / ${item.size}</div>
+        <div class="cart-item-price">${formatPrice(item.price)}</div>
+        <div class="cart-item-qty">
+          <button onclick="updateQty(${i}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="updateQty(${i}, 1)">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateQty(index, delta) {
+  cart[index].qty += delta;
+  if (cart[index].qty <= 0) cart.splice(index, 1);
+  updateCart();
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+  document.getElementById('cartDrawer').classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════════
+   QUICK VIEW MODAL
+   ═══════════════════════════════════════════════ */
+
+function quickView(productId) {
+  const p = products.find(x => x.id === productId);
+  showToast('Quick view coming soon — select size and add to cart below');
+}
+
+/* ═══════════════════════════════════════════════
+   UI HELPERS
+   ═══════════════════════════════════════════════ */
+
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ═══════════════════════════════════════════════ */
+
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+/* ═══════════════════════════════════════════════
+   NAVBAR SCROLL EFFECT
+   ═══════════════════════════════════════════════ */
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+
+/* ═══════════════════════════════════════════════
+   INITIALIZE
+   ═══════════════════════════════════════════════ */
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Hide loader after 1.5s
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1500);
+  
+  renderProducts();
+  initScrollAnimations();
+});
+
+/* ═══════════════════════════════════════════════
+   HOW TO EDIT THIS WEBSITE:
+   
+   1. ADD NEW PRODUCTS:
+      - Copy a product object in the products array above
+      - Change the id, name, color, price, and image URL
+      - Add your own image URLs from your hosting
+   
+   2. CHANGE COLORS:
+      - Scroll to the top CSS :root section
+      - Edit the hex codes to your brand colors
+   
+   3. CHANGE TEXT:
+      - Find the section in the HTML body
+      - Edit the text directly between the tags
+   
+   4. ADD YOUR OWN IMAGES:
+      - Upload images to Imgur, Cloudinary, or your web host
+      - Replace the Unsplash URLs with your own image URLs
+   
+   5. SAVE & OPEN:
+      - Save this file as index.html
+      - Double-click to open in your browser
+   ═══════════════════════════════════════════════ */
+</script>
+</body>
+</html>
